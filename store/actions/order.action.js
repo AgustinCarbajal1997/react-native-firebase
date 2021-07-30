@@ -20,7 +20,7 @@ export const getOrders = (user) => {
 
       dispatch({ type: GET_ORDERS, payload: items });
     } catch (err) {
-      console.log(err.message);
+      console.log("error",err.message);
     }
   }
 }

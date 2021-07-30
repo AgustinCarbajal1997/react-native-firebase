@@ -21,7 +21,7 @@ const OrdersScreen = () => {
     )
     
 
-    console.log("ordenes",orders);
+    
     
     return (
       <View style={styles.container}>

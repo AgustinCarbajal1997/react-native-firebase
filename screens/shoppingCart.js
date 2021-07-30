@@ -4,6 +4,7 @@ import { useSelector, useDispatch, connect } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { deleteItem } from '../store/actions/cart.action';
 import { confirmCart } from '../store/actions/cart.action';
+import { getOrders } from '../store/actions/order.action';
 
 const ShoppingCart = () => {
 
@@ -20,8 +21,9 @@ const ShoppingCart = () => {
       dispatch(deleteItem(id))
     }
 
-    const handleToConfirm = (payload) => {
-      dispatch(confirmCart(payload,user))
+    const handleToConfirm = () => {
+      dispatch(confirmCart(cartList,user))
+      dispatch(getOrders(user));
     }
 
     const Item = ({ id, imageSrc, titulo, precio, itemCompleto }) => {
@@ -55,7 +57,7 @@ const ShoppingCart = () => {
                 ListFooterComponent={
                   <View style={styles.finalInfo}>
                     <Text style={styles.total}>Total a pagar: ${total}</Text>
-                    <TouchableOpacity style={styles.confirmCart} onPress={()=> handleToConfirm(cartList)}><Text style={styles.confirmCartText}>Confirmar Carrito</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.confirmCart} onPress={handleToConfirm}><Text style={styles.confirmCartText}>Confirmar Carrito</Text></TouchableOpacity>
                   </View>
 
                 }
