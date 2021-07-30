@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -9,7 +9,7 @@ import Indumentaria from "../screens/indumentaria";
 import ShoppingCart from "../screens/shoppingCart";
 import Favs from "../screens/favs";
 import { useSelector } from "react-redux";
-
+import AuthScreen from "../screens/users/AuthScreen";
 
 const HomeStack = createStackNavigator();
 const HomeStackScreen = () =>{
@@ -55,7 +55,7 @@ const FavsScreen = () => {
 
 
 
-
+// creacion del Tab navigator
 const Tab = createBottomTabNavigator();
 
 const BreadNavigator = () => {
@@ -64,7 +64,7 @@ const BreadNavigator = () => {
     return (
         
     
-        <NavigationContainer>
+        
             <Tab.Navigator initialRouteName="Home"
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused, color, size }) => {
@@ -94,8 +94,37 @@ const BreadNavigator = () => {
                 <Tab.Screen name="Favoritos" component={FavsScreen} options={{ tabBarBadge:badge_favs}}/>
                 
             </Tab.Navigator>
-        </NavigationContainer>
+        
     )
 }
     
-export default BreadNavigator
+
+
+// creacion del auth navigator
+
+const AuthStack = createStackNavigator();
+
+const AuthNavigator = () => {
+    return (
+        <AuthStack.Navigator 
+            initialRouteName="Login"
+            screenOptions={{
+                headerShown:false
+            }}
+        >
+            <AuthStack.Screen name="Login" component={AuthScreen} />
+        </AuthStack.Navigator>
+    )
+}
+// exportacion condicional
+export default () => {
+    // const [user, setUser] = useState(null);
+    const loggedIn = useSelector(state => state.auth.token);
+
+    return(
+        <NavigationContainer>
+            {   loggedIn ? (<BreadNavigator/>) : (<AuthNavigator/>)   }
+        </NavigationContainer>
+    )
+
+}
