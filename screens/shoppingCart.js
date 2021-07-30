@@ -9,6 +9,7 @@ const ShoppingCart = () => {
 
     const dispatch = useDispatch();
 
+    const user = useSelector(state => state.auth.user);
     const cartList = useSelector(state => state.cart.productsCart);
     let total = 0;
       for (let i = 0; i < cartList.length; i++) {
@@ -20,7 +21,7 @@ const ShoppingCart = () => {
     }
 
     const handleToConfirm = (payload) => {
-      dispatch(confirmCart(payload))
+      dispatch(confirmCart(payload,user))
     }
 
     const Item = ({ id, imageSrc, titulo, precio, itemCompleto }) => {

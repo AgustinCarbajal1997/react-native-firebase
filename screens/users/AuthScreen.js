@@ -88,7 +88,7 @@ const formReducer = (state, action) => {
         style={styles.screen}
       >
         <View style={styles.container}>
-          <Text style={styles.title}>MI PAN: LOGIN</Text>
+          <Text style={styles.title}>THE CROWN SHOWROOM</Text>
           <View>
             <Input
               id="email"

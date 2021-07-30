@@ -10,6 +10,7 @@ import ShoppingCart from "../screens/shoppingCart";
 import Favs from "../screens/favs";
 import { useSelector } from "react-redux";
 import AuthScreen from "../screens/users/AuthScreen";
+import OrdersScreen from "../screens/orders";
 
 const HomeStack = createStackNavigator();
 const HomeStackScreen = () =>{
@@ -78,6 +79,8 @@ const BreadNavigator = () => {
                         iconName = focused ? 'shoppingcart' : 'shoppingcart';
                       }else if (route.name === 'Favoritos') {
                         iconName = focused ? 'hearto' : 'hearto';
+                      }else if (route.name === 'Ordenes') {
+                        iconName = focused ? 'bars' : 'bars';
                       }
           
                       
@@ -92,6 +95,7 @@ const BreadNavigator = () => {
                 <Tab.Screen name="Home" component={HomeStackScreen}/>
                 <Tab.Screen name="Carrito" component={ShoppingCartScreen} options={{ tabBarBadge:badge_cart}}/>
                 <Tab.Screen name="Favoritos" component={FavsScreen} options={{ tabBarBadge:badge_favs}}/>
+                <Tab.Screen name="Ordenes" component={OrdersScreen} />
                 
             </Tab.Navigator>
         
@@ -118,12 +122,13 @@ const AuthNavigator = () => {
 }
 // exportacion condicional
 export default () => {
-    // const [user, setUser] = useState(null);
+    // const [user, setUser] = useState(true);
     const loggedIn = useSelector(state => state.auth.token);
 
     return(
         <NavigationContainer>
             {   loggedIn ? (<BreadNavigator/>) : (<AuthNavigator/>)   }
+            {/* {   user ? (<BreadNavigator/>) : (<AuthNavigator/>)   } */}
         </NavigationContainer>
     )
 
